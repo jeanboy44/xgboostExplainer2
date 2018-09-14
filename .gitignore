@@ -31,6 +31,10 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+<<<<<<< HEAD
 
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
+=======
+.Rproj.user
+>>>>>>> 31c49169d17cd426a1f445b42ddeaaab2766c358
