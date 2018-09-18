@@ -12,7 +12,7 @@ getStatsForTrees = function(trees, nodes.train, type = "binary", base_score = 0.
   non.leaves = which(tree_list[,leaf]==F)
 
 
-  if(progress_print=TRUE){
+  if(progress_print){
     # The default cover (H) seems to lose precision so this loop recalculates it for each node of each tree
     cat('\n\nRecalculating the cover for each non-leaf... \n')
     pb <- txtProgressBar(style=3)
