@@ -68,7 +68,7 @@ buildExplainer = function(xgb.model, trainingData, type = "binary", base_score =
     cat('\nSTEP 1 of 2')
     tree_list = getStatsForTrees(trees, nodes.train, type = type, base_score = base_score, progress_print=progress_print)
     cat('\n\nSTEP 2 of 2')
-    explainer = buildExplainerFromTreeList(tree_list,col_names)
+    explainer = buildExplainerFromTreeList(tree_list,col_names, progress_print=progress_print)
 
     cat('\n\nDONE!\n\n')
   }else{
@@ -83,7 +83,7 @@ buildExplainer = function(xgb.model, trainingData, type = "binary", base_score =
     # cat('\nSTEP 1 of 2')
     tree_list = getStatsForTrees(trees, nodes.train, type = type, base_score = base_score, progress_print=progress_print)
     # cat('\n\nSTEP 2 of 2')
-    explainer = buildExplainerFromTreeList(tree_list,col_names)
+    explainer = buildExplainerFromTreeList(tree_list,col_names, progress_print=progress_print)
 
     # cat('\n\nDONE!\n\n')
   }
