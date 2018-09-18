@@ -56,7 +56,7 @@
 showWaterfall = function(xgb.model, explainer, DMatrix, data.matrix, idx, type = "binary", threshold = 0.0001, limits = c(NA, NA), progress_print=TRUE){
 
 
-  breakdown = explainPredictions(xgb.model, explainer, slice(DMatrix,as.integer(idx)))
+  breakdown = explainPredictions(xgb.model, explainer, slice(DMatrix,as.integer(idx)), progress_print=progress_print)
 
   weight = rowSums(breakdown)
   if (type == 'regression'){

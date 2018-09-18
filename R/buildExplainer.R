@@ -54,22 +54,38 @@
 #' showWaterfall(xgb.model, explainer, xgb.test.data, test.data,  8, type = "binary")
 
 
-buildExplainer = function(xgb.model, trainingData, type = "binary", base_score = 0.5, trees_idx = NULL){
+buildExplainer = function(xgb.model, trainingData, type = "binary", base_score = 0.5, trees_idx = NULL, progress_print=TRUE){
 
-  col_names = attr(trainingData, ".Dimnames")[[2]]
-  cat('\nCreating the trees of the xgboost model...')
-  trees = xgb.model.dt.tree(col_names, model = xgb.model)
-  # trees = xgb.model.dt.tree(col_names, model = xgb.model, trees = trees_idx)
-  cat('\nGetting the leaf nodes for the training set observations...')
-  nodes.train = predict(xgb.model,trainingData,predleaf =TRUE)
+  if(progress_print){
+    col_names = attr(trainingData, ".Dimnames")[[2]]
+    cat('\nCreating the trees of the xgboost model...')
+    trees = xgb.model.dt.tree(col_names, model = xgb.model)
+    # trees = xgb.model.dt.tree(col_names, model = xgb.model, trees = trees_idx)
+    cat('\nGetting the leaf nodes for the training set observations...')
+    nodes.train = predict(xgb.model,trainingData,predleaf =TRUE)
 
-  cat('\nBuilding the Explainer...')
-  cat('\nSTEP 1 of 2')
-  tree_list = getStatsForTrees(trees, nodes.train, type = type, base_score = base_score)
-  cat('\n\nSTEP 2 of 2')
-  explainer = buildExplainerFromTreeList(tree_list,col_names)
+    cat('\nBuilding the Explainer...')
+    cat('\nSTEP 1 of 2')
+    tree_list = getStatsForTrees(trees, nodes.train, type = type, base_score = base_score)
+    cat('\n\nSTEP 2 of 2')
+    explainer = buildExplainerFromTreeList(tree_list,col_names)
 
-  cat('\n\nDONE!\n\n')
+    cat('\n\nDONE!\n\n')
+  }else{
+    col_names = attr(trainingData, ".Dimnames")[[2]]
+    # cat('\nCreating the trees of the xgboost model...')
+    trees = xgb.model.dt.tree(col_names, model = xgb.model)
+    # trees = xgb.model.dt.tree(col_names, model = xgb.model, trees = trees_idx)
+    # cat('\nGetting the leaf nodes for the training set observations...')
+    nodes.train = predict(xgb.model,trainingData,predleaf =TRUE)
 
+    # cat('\nBuilding the Explainer...')
+    # cat('\nSTEP 1 of 2')
+    tree_list = getStatsForTrees(trees, nodes.train, type = type, base_score = base_score)
+    # cat('\n\nSTEP 2 of 2')
+    explainer = buildExplainerFromTreeList(tree_list,col_names)
+
+    # cat('\n\nDONE!\n\n')
+  }
   return (explainer)
 }
