@@ -53,7 +53,7 @@
 #' showWaterfall(xgb.model, explainer, xgb.test.data, test.data,  2, type = "binary")
 #' showWaterfall(xgb.model, explainer, xgb.test.data, test.data,  8, type = "binary")
 
-showWaterfall = function(xgb.model, explainer, DMatrix, data.matrix, idx, type = "binary", threshold = 0.0001, limits = c(NA, NA)){
+showWaterfall = function(xgb.model, explainer, DMatrix, data.matrix, idx, type = "binary", threshold = 0.0001, limits = c(NA, NA), progress_print=TRUE){
 
 
   breakdown = explainPredictions(xgb.model, explainer, slice(DMatrix,as.integer(idx)))
@@ -111,7 +111,9 @@ showWaterfall = function(xgb.model, explainer, DMatrix, data.matrix, idx, type =
   cat("\nWeight: ", weight)
   cat("\nBreakdown")
   cat('\n')
-  print(breakdown_summary)
+  if(progress_print){
+    print(breakdown_summary)
+  }
 
   if (type == 'regression'){
 
