@@ -104,14 +104,14 @@ showWaterfall = function(xgb.model, explainer, DMatrix, data.matrix, idx, type =
 
 
 
-  if (!is.null(getinfo(DMatrix,"label"))){
-    cat("\nActual: ", getinfo(slice(DMatrix,as.integer(idx)),"label"))
-  }
-  cat("\nPrediction: ", pred)
-  cat("\nWeight: ", weight)
-  cat("\nBreakdown")
-  cat('\n')
   if(progress_print){
+    if (!is.null(getinfo(DMatrix,"label"))){
+      cat("\nActual: ", getinfo(slice(DMatrix,as.integer(idx)),"label"))
+    }
+    cat("\nPrediction: ", pred)
+    cat("\nWeight: ", weight)
+    cat("\nBreakdown")
+    cat('\n')
     print(breakdown_summary)
   }
 
