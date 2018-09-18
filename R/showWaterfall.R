@@ -102,8 +102,6 @@ showWaterfall = function(xgb.model, explainer, DMatrix, data.matrix, idx, type =
     labels[1] = 'intercept'
   }
 
-
-
   if(progress_print){
     if (!is.null(getinfo(DMatrix,"label"))){
       cat("\nActual: ", getinfo(slice(DMatrix,as.integer(idx)),"label"))
